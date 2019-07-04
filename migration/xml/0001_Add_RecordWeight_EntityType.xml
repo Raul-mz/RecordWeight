@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Migrations>
+  <Migration EntityType="D" Name="Add Record Weight" ReleaseNo="3.9.3" SeqNo="4780">
+    <Step SeqNo="10" StepType="AD">
+      <PO AD_Table_ID="882" Action="I" Record_ID="50054" Table="AD_EntityType">
+        <Data AD_Column_ID="15607" Column="Processing">false</Data>
+        <Data AD_Column_ID="15599" Column="Updated">2019-07-04 17:29:07.867</Data>
+        <Data AD_Column_ID="15596" Column="IsActive">true</Data>
+        <Data AD_Column_ID="15592" Column="EntityType">ECA07</Data>
+        <Data AD_Column_ID="15595" Column="AD_EntityType_ID">50054</Data>
+        <Data AD_Column_ID="15593" Column="AD_Client_ID">0</Data>
+        <Data AD_Column_ID="15594" Column="AD_Org_ID">0</Data>
+        <Data AD_Column_ID="15597" Column="Created">2019-07-04 17:29:07.867</Data>
+        <Data AD_Column_ID="15600" Column="UpdatedBy">100</Data>
+        <Data AD_Column_ID="15602" Column="Description">Spin Contribution Record Weight</Data>
+        <Data AD_Column_ID="15604" Column="Version" isNewNull="true"/>
+        <Data AD_Column_ID="15605" Column="ModelPackage">org.spin.model</Data>
+        <Data AD_Column_ID="15606" Column="Classpath" isNewNull="true"/>
+        <Data AD_Column_ID="15603" Column="Help">Contribution by E.R.P Consultores y Asociados, C.A</Data>
+        <Data AD_Column_ID="15598" Column="CreatedBy">100</Data>
+        <Data AD_Column_ID="15601" Column="Name">Spin Contribution (Record Weight)</Data>
+        <Data AD_Column_ID="84318" Column="UUID">c22f5438-9ea2-11e9-90ee-0242ac110002</Data>
+      </PO>
+    </Step>
+  </Migration>
+</Migrations>
