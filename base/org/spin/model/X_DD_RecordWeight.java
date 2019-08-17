@@ -33,7 +33,7 @@ public class X_DD_RecordWeight extends PO implements I_DD_RecordWeight, I_Persis
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20190708L;
+	private static final long serialVersionUID = 20190817L;
 
     /** Standard Constructor */
     public X_DD_RecordWeight (Properties ctx, int DD_RecordWeight_ID, String trxName)
@@ -162,6 +162,31 @@ public class X_DD_RecordWeight extends PO implements I_DD_RecordWeight, I_Persis
 		return (Timestamp)get_Value(COLUMNNAME_DateDoc);
 	}
 
+	public org.eevolution.model.I_DD_Driver getDD_Driver() throws RuntimeException
+    {
+		return (org.eevolution.model.I_DD_Driver)MTable.get(getCtx(), org.eevolution.model.I_DD_Driver.Table_Name)
+			.getPO(getDD_Driver_ID(), get_TrxName());	}
+
+	/** Set Driver.
+		@param DD_Driver_ID Driver	  */
+	public void setDD_Driver_ID (int DD_Driver_ID)
+	{
+		if (DD_Driver_ID < 1) 
+			set_Value (COLUMNNAME_DD_Driver_ID, null);
+		else 
+			set_Value (COLUMNNAME_DD_Driver_ID, Integer.valueOf(DD_Driver_ID));
+	}
+
+	/** Get Driver.
+		@return Driver	  */
+	public int getDD_Driver_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_DD_Driver_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
 	public org.eevolution.model.I_DD_Freight getDD_Freight() throws RuntimeException
     {
 		return (org.eevolution.model.I_DD_Freight)MTable.get(getCtx(), org.eevolution.model.I_DD_Freight.Table_Name)
@@ -202,6 +227,31 @@ public class X_DD_RecordWeight extends PO implements I_DD_RecordWeight, I_Persis
 	public int getDD_RecordWeight_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_DD_RecordWeight_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public org.eevolution.model.I_DD_Vehicle getDD_Vehicle() throws RuntimeException
+    {
+		return (org.eevolution.model.I_DD_Vehicle)MTable.get(getCtx(), org.eevolution.model.I_DD_Vehicle.Table_Name)
+			.getPO(getDD_Vehicle_ID(), get_TrxName());	}
+
+	/** Set Vehicle.
+		@param DD_Vehicle_ID Vehicle	  */
+	public void setDD_Vehicle_ID (int DD_Vehicle_ID)
+	{
+		if (DD_Vehicle_ID < 1) 
+			set_Value (COLUMNNAME_DD_Vehicle_ID, null);
+		else 
+			set_Value (COLUMNNAME_DD_Vehicle_ID, Integer.valueOf(DD_Vehicle_ID));
+	}
+
+	/** Get Vehicle.
+		@return Vehicle	  */
+	public int getDD_Vehicle_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_DD_Vehicle_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -451,6 +501,34 @@ public class X_DD_RecordWeight extends PO implements I_DD_RecordWeight, I_Persis
 			return "Y".equals(oo);
 		}
 		return false;
+	}
+
+	public org.compiere.model.I_M_Shipper getM_Shipper() throws RuntimeException
+    {
+		return (org.compiere.model.I_M_Shipper)MTable.get(getCtx(), org.compiere.model.I_M_Shipper.Table_Name)
+			.getPO(getM_Shipper_ID(), get_TrxName());	}
+
+	/** Set Shipper.
+		@param M_Shipper_ID 
+		Method or manner of product delivery
+	  */
+	public void setM_Shipper_ID (int M_Shipper_ID)
+	{
+		if (M_Shipper_ID < 1) 
+			set_Value (COLUMNNAME_M_Shipper_ID, null);
+		else 
+			set_Value (COLUMNNAME_M_Shipper_ID, Integer.valueOf(M_Shipper_ID));
+	}
+
+	/** Get Shipper.
+		@return Method or manner of product delivery
+	  */
+	public int getM_Shipper_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_M_Shipper_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
 	}
 
 	/** Set Net Weight.

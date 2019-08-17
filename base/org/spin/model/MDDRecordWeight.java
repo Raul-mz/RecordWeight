@@ -28,6 +28,7 @@ import org.compiere.process.DocumentEngine;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Msg;
+import org.eevolution.model.MDDFreight;
 
 /** Generated Model for DD_RecordWeight
  *  @author Adempiere (generated) 
@@ -224,6 +225,9 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 	
 	@Override
 	protected boolean beforeSave(boolean newRecord) {
+		if(is_ValueChanged(COLUMNNAME_DD_Freight_ID)) {
+			setFreightValues();
+		}
 		if(!is_ValueChanged(COLUMNNAME_WeightRegistered)) {
 			return true;
 		}
@@ -282,6 +286,21 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 	    //	Calculate Net Weight
 	    setNetWeight(grossWeight.subtract(tareWeight));
 		return true;
+	}
+	
+	/**
+	 * Set Freight values
+	 */
+	private void setFreightValues() {
+		if(getDD_Freight_ID() > 0) {
+			MDDFreight freight = (MDDFreight) getDD_Freight();
+			if(freight.getDD_Driver_ID() > 0) {
+				setDD_Driver_ID(freight.getDD_Driver_ID());
+			}
+			if(freight.getDD_Vehicle_ID() > 0) {
+				setDD_Vehicle_ID(freight.getDD_Vehicle_ID());
+			}
+		}
 	}
 	
 	/**

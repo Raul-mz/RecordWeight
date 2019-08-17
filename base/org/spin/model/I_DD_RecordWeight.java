@@ -122,6 +122,17 @@ public interface I_DD_RecordWeight
 	  */
 	public Timestamp getDateDoc();
 
+    /** Column name DD_Driver_ID */
+    public static final String COLUMNNAME_DD_Driver_ID = "DD_Driver_ID";
+
+	/** Set Driver	  */
+	public void setDD_Driver_ID (int DD_Driver_ID);
+
+	/** Get Driver	  */
+	public int getDD_Driver_ID();
+
+	public org.eevolution.model.I_DD_Driver getDD_Driver() throws RuntimeException;
+
     /** Column name DD_Freight_ID */
     public static final String COLUMNNAME_DD_Freight_ID = "DD_Freight_ID";
 
@@ -141,6 +152,17 @@ public interface I_DD_RecordWeight
 
 	/** Get Record Weight	  */
 	public int getDD_RecordWeight_ID();
+
+    /** Column name DD_Vehicle_ID */
+    public static final String COLUMNNAME_DD_Vehicle_ID = "DD_Vehicle_ID";
+
+	/** Set Vehicle	  */
+	public void setDD_Vehicle_ID (int DD_Vehicle_ID);
+
+	/** Get Vehicle	  */
+	public int getDD_Vehicle_ID();
+
+	public org.eevolution.model.I_DD_Vehicle getDD_Vehicle() throws RuntimeException;
 
     /** Column name Description */
     public static final String COLUMNNAME_Description = "Description";
@@ -276,6 +298,21 @@ public interface I_DD_RecordWeight
 	  * This is a Sales Transaction
 	  */
 	public boolean isSOTrx();
+
+    /** Column name M_Shipper_ID */
+    public static final String COLUMNNAME_M_Shipper_ID = "M_Shipper_ID";
+
+	/** Set Shipper.
+	  * Method or manner of product delivery
+	  */
+	public void setM_Shipper_ID (int M_Shipper_ID);
+
+	/** Get Shipper.
+	  * Method or manner of product delivery
+	  */
+	public int getM_Shipper_ID();
+
+	public org.compiere.model.I_M_Shipper getM_Shipper() throws RuntimeException;
 
     /** Column name NetWeight */
     public static final String COLUMNNAME_NetWeight = "NetWeight";
