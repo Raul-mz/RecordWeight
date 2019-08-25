@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Migrations>
-  <Migration EntityType="D" Name="Add Record Weight window" ReleaseNo="" SeqNo="4790">
+  <Migration EntityType="D" Name="Record weight: Add Record Weight window" ReleaseNo="" SeqNo="4790">
     <Step SeqNo="10" StepType="AD">
       <PO AD_Table_ID="105" Action="I" Record_ID="53682" Table="AD_Window">
         <Data AD_Column_ID="569" Column="Created">2019-07-05 17:26:47.839</Data>

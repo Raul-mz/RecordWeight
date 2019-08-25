@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Migrations>
-  <Migration EntityType="D" Name="Add reference to WM_InOutBound" ReleaseNo="3.9.3" SeqNo="4800">
+  <Migration EntityType="D" Name="Record weight: Add reference to WM_InOutBound" ReleaseNo="3.9.3" SeqNo="4800">
     <Step SeqNo="10" StepType="AD">
       <PO AD_Table_ID="102" Action="I" Record_ID="54157" Table="AD_Reference">
         <Data AD_Column_ID="556" Column="Updated">2019-07-08 10:47:37.401</Data>

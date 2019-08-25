@@ -33,7 +33,7 @@ public class X_DD_RecordWeight extends PO implements I_DD_RecordWeight, I_Persis
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20190817L;
+	private static final long serialVersionUID = 20190825L;
 
     /** Standard Constructor */
     public X_DD_RecordWeight (Properties ctx, int DD_RecordWeight_ID, String trxName)
@@ -53,6 +53,7 @@ public class X_DD_RecordWeight extends PO implements I_DD_RecordWeight, I_Persis
 			setIsApproved (false);
 // N
 			setIsSOTrx (false);
+// N
 			setNetWeight (Env.ZERO);
 			setProcessed (false);
 			setProcessing (false);
@@ -112,6 +113,62 @@ public class X_DD_RecordWeight extends PO implements I_DD_RecordWeight, I_Persis
 	public int getC_DocType_ID () 
 	{
 		Integer ii = (Integer)get_Value(COLUMNNAME_C_DocType_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public org.compiere.model.I_C_Order getC_Order() throws RuntimeException
+    {
+		return (org.compiere.model.I_C_Order)MTable.get(getCtx(), org.compiere.model.I_C_Order.Table_Name)
+			.getPO(getC_Order_ID(), get_TrxName());	}
+
+	/** Set Order.
+		@param C_Order_ID 
+		Order
+	  */
+	public void setC_Order_ID (int C_Order_ID)
+	{
+		if (C_Order_ID < 1) 
+			set_Value (COLUMNNAME_C_Order_ID, null);
+		else 
+			set_Value (COLUMNNAME_C_Order_ID, Integer.valueOf(C_Order_ID));
+	}
+
+	/** Get Order.
+		@return Order
+	  */
+	public int getC_Order_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_Order_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
+	}
+
+	public org.compiere.model.I_C_OrderLine getC_OrderLine() throws RuntimeException
+    {
+		return (org.compiere.model.I_C_OrderLine)MTable.get(getCtx(), org.compiere.model.I_C_OrderLine.Table_Name)
+			.getPO(getC_OrderLine_ID(), get_TrxName());	}
+
+	/** Set Sales Order Line.
+		@param C_OrderLine_ID 
+		Sales Order Line
+	  */
+	public void setC_OrderLine_ID (int C_OrderLine_ID)
+	{
+		if (C_OrderLine_ID < 1) 
+			set_Value (COLUMNNAME_C_OrderLine_ID, null);
+		else 
+			set_Value (COLUMNNAME_C_OrderLine_ID, Integer.valueOf(C_OrderLine_ID));
+	}
+
+	/** Get Sales Order Line.
+		@return Sales Order Line
+	  */
+	public int getC_OrderLine_ID () 
+	{
+		Integer ii = (Integer)get_Value(COLUMNNAME_C_OrderLine_ID);
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
@@ -479,13 +536,37 @@ public class X_DD_RecordWeight extends PO implements I_DD_RecordWeight, I_Persis
 		return false;
 	}
 
+	/** Set Reference Weight.
+		@param IsReferenceWeight 
+		Describe a Reference Weight
+	  */
+	public void setIsReferenceWeight (boolean IsReferenceWeight)
+	{
+		set_ValueNoCheck (COLUMNNAME_IsReferenceWeight, Boolean.valueOf(IsReferenceWeight));
+	}
+
+	/** Get Reference Weight.
+		@return Describe a Reference Weight
+	  */
+	public boolean isReferenceWeight () 
+	{
+		Object oo = get_Value(COLUMNNAME_IsReferenceWeight);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
 	/** Set Sales Transaction.
 		@param IsSOTrx 
 		This is a Sales Transaction
 	  */
 	public void setIsSOTrx (boolean IsSOTrx)
 	{
-		set_Value (COLUMNNAME_IsSOTrx, Boolean.valueOf(IsSOTrx));
+		set_ValueNoCheck (COLUMNNAME_IsSOTrx, Boolean.valueOf(IsSOTrx));
 	}
 
 	/** Get Sales Transaction.

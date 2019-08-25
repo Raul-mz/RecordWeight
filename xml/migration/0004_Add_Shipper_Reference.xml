@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Migrations>
-  <Migration EntityType="D" Name="Add Vehicle and Driver reference" ReleaseNo="3.9.3" SeqNo="4810">
+  <Migration EntityType="D" Name="Record weight: Add Vehicle and Driver reference" ReleaseNo="3.9.3" SeqNo="4810">
     <Step SeqNo="10" StepType="AD">
       <PO AD_Table_ID="102" Action="I" Record_ID="54160" Table="AD_Reference">
         <Data AD_Column_ID="556" Column="Updated">2019-08-17 13:48:08.717</Data>

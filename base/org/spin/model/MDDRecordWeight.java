@@ -245,43 +245,56 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 	    	tareWeight = Env.ZERO;
 
 	    if(weightRegistered.equals(Env.ZERO)) {
+	    	if(!isSOTrx()) {
+				setWeightStatus(WEIGHTSTATUS_WaitingForGrossWeight);
+			} else {
+				setWeightStatus(WEIGHTSTATUS_WaitingForTareWeight);
+			}
 	    	return true;
 	    }
 	    Timestamp today = new Timestamp(System.currentTimeMillis());
-	    if(!isSOTrx()){
-	    	if(grossWeight.equals(Env.ZERO)){
+	    if(!isSOTrx()) {
+	    	if(grossWeight.equals(Env.ZERO)) {
 	    		setGrossWeight(weightRegistered);
 	    		setInDate(today);
 	    		grossWeight = weightRegistered;
-	    	} else{
+	    	} else {
 	    		setTareWeight(weightRegistered);
 	    		setOutDate(today);
 	    		tareWeight = weightRegistered;
 	    	}
     		//	Valid Weight Status
-	    	if(grossWeight.equals(Env.ZERO))
+	    	if(grossWeight.equals(Env.ZERO)
+	    			&& tareWeight.equals(Env.ZERO)) {
 	    		setWeightStatus(WEIGHTSTATUS_WaitingForGrossWeight);
-	    	else if(tareWeight.equals(Env.ZERO))
+	    	} else if(grossWeight.equals(Env.ZERO)) {
+	    		setWeightStatus(WEIGHTSTATUS_WaitingForGrossWeight);
+	    	} else if(tareWeight.equals(Env.ZERO)) {
 	    		setWeightStatus(WEIGHTSTATUS_WaitingForTareWeight);
-	    	else
+	    	} else {
 	    		setWeightStatus(WEIGHTSTATUS_Completed);
-	    } else{
-	    	if(tareWeight.equals(Env.ZERO)){
+	    	}
+	    } else {
+	    	if(tareWeight.equals(Env.ZERO)) {
 	    		setTareWeight(weightRegistered);
 	    		setInDate(today);
 	    		tareWeight = weightRegistered;
-	    	} else{
+	    	} else {
 	    		setGrossWeight(weightRegistered);
 	    		setOutDate(today);
 	    		grossWeight = weightRegistered;
 	    	}
     		//	Valid Weight Status
-	    	if(tareWeight.equals(Env.ZERO))
+	    	if(grossWeight.equals(Env.ZERO)
+	    			&& tareWeight.equals(Env.ZERO)) {
 	    		setWeightStatus(WEIGHTSTATUS_WaitingForTareWeight);
-	    	else if(grossWeight.equals(Env.ZERO))
+	    	} else if(tareWeight.equals(Env.ZERO)) {
+	    		setWeightStatus(WEIGHTSTATUS_WaitingForTareWeight);
+	    	} else if(grossWeight.equals(Env.ZERO)) {
 	    		setWeightStatus(WEIGHTSTATUS_WaitingForGrossWeight);
-	    	else
+	    	} else {
 	    		setWeightStatus(WEIGHTSTATUS_Completed);
+	    	}
 	    }
 	    //	Calculate Net Weight
 	    setNetWeight(grossWeight.subtract(tareWeight));
@@ -299,6 +312,9 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 			}
 			if(freight.getDD_Vehicle_ID() > 0) {
 				setDD_Vehicle_ID(freight.getDD_Vehicle_ID());
+			}
+			if(freight.getM_Shipper_ID() > 0) {
+				setM_Shipper_ID(freight.getM_Shipper_ID());
 			}
 		}
 	}

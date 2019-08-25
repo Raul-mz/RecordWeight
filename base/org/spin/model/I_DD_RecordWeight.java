@@ -78,6 +78,36 @@ public interface I_DD_RecordWeight
 
 	public org.compiere.model.I_C_DocType getC_DocType() throws RuntimeException;
 
+    /** Column name C_Order_ID */
+    public static final String COLUMNNAME_C_Order_ID = "C_Order_ID";
+
+	/** Set Order.
+	  * Order
+	  */
+	public void setC_Order_ID (int C_Order_ID);
+
+	/** Get Order.
+	  * Order
+	  */
+	public int getC_Order_ID();
+
+	public org.compiere.model.I_C_Order getC_Order() throws RuntimeException;
+
+    /** Column name C_OrderLine_ID */
+    public static final String COLUMNNAME_C_OrderLine_ID = "C_OrderLine_ID";
+
+	/** Set Sales Order Line.
+	  * Sales Order Line
+	  */
+	public void setC_OrderLine_ID (int C_OrderLine_ID);
+
+	/** Get Sales Order Line.
+	  * Sales Order Line
+	  */
+	public int getC_OrderLine_ID();
+
+	public org.compiere.model.I_C_OrderLine getC_OrderLine() throws RuntimeException;
+
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
 
@@ -285,6 +315,19 @@ public interface I_DD_RecordWeight
 	  * Indicates if this document / line is printed
 	  */
 	public boolean isPrinted();
+
+    /** Column name IsReferenceWeight */
+    public static final String COLUMNNAME_IsReferenceWeight = "IsReferenceWeight";
+
+	/** Set Reference Weight.
+	  * Describe a Reference Weight
+	  */
+	public void setIsReferenceWeight (boolean IsReferenceWeight);
+
+	/** Get Reference Weight.
+	  * Describe a Reference Weight
+	  */
+	public boolean isReferenceWeight();
 
     /** Column name IsSOTrx */
     public static final String COLUMNNAME_IsSOTrx = "IsSOTrx";
