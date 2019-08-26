@@ -33,7 +33,7 @@ public class X_DD_RecordWeight extends PO implements I_DD_RecordWeight, I_Persis
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20190825L;
+	private static final long serialVersionUID = 20190826L;
 
     /** Standard Constructor */
     public X_DD_RecordWeight (Properties ctx, int DD_RecordWeight_ID, String trxName)
@@ -582,6 +582,43 @@ public class X_DD_RecordWeight extends PO implements I_DD_RecordWeight, I_Persis
 			return "Y".equals(oo);
 		}
 		return false;
+	}
+
+	/** Set Maximum Weight.
+		@param MaximumWeight Maximum Weight	  */
+	public void setMaximumWeight (BigDecimal MaximumWeight)
+	{
+		set_Value (COLUMNNAME_MaximumWeight, MaximumWeight);
+	}
+
+	/** Get Maximum Weight.
+		@return Maximum Weight	  */
+	public BigDecimal getMaximumWeight () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_MaximumWeight);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
+	}
+
+	/** Set Minimum Weight.
+		@param MinimumWeight 
+		Minimum Weight of a product
+	  */
+	public void setMinimumWeight (BigDecimal MinimumWeight)
+	{
+		set_Value (COLUMNNAME_MinimumWeight, MinimumWeight);
+	}
+
+	/** Get Minimum Weight.
+		@return Minimum Weight of a product
+	  */
+	public BigDecimal getMinimumWeight () 
+	{
+		BigDecimal bd = (BigDecimal)get_Value(COLUMNNAME_MinimumWeight);
+		if (bd == null)
+			 return Env.ZERO;
+		return bd;
 	}
 
 	public org.compiere.model.I_M_Shipper getM_Shipper() throws RuntimeException

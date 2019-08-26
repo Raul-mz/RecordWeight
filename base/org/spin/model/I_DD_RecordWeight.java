@@ -342,6 +342,28 @@ public interface I_DD_RecordWeight
 	  */
 	public boolean isSOTrx();
 
+    /** Column name MaximumWeight */
+    public static final String COLUMNNAME_MaximumWeight = "MaximumWeight";
+
+	/** Set Maximum Weight	  */
+	public void setMaximumWeight (BigDecimal MaximumWeight);
+
+	/** Get Maximum Weight	  */
+	public BigDecimal getMaximumWeight();
+
+    /** Column name MinimumWeight */
+    public static final String COLUMNNAME_MinimumWeight = "MinimumWeight";
+
+	/** Set Minimum Weight.
+	  * Minimum Weight of a product
+	  */
+	public void setMinimumWeight (BigDecimal MinimumWeight);
+
+	/** Get Minimum Weight.
+	  * Minimum Weight of a product
+	  */
+	public BigDecimal getMinimumWeight();
+
     /** Column name M_Shipper_ID */
     public static final String COLUMNNAME_M_Shipper_ID = "M_Shipper_ID";
 
