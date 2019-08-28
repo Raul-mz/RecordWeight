@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Migrations>
+  <Migration EntityType="D" Name="Record weight: Change validation for orders" ReleaseNo="3.9.3" SeqNo="4830">
+    <Step SeqNo="10" StepType="AD">
+      <PO AD_Table_ID="108" Action="U" Record_ID="52714" Table="AD_Val_Rule">
+        <Data AD_Column_ID="193" Column="Code" oldValue="AND NOT EXISTS(SELECT 1 FROM DD_RecordWeight rw WHERE rw.DocStatus IN('CO', 'CL') AND rw.DD_Freight_ID = DD_Freight.DD_Freight_ID)">DD_Freight.DocStatus = 'CO'
+AND NOT EXISTS(SELECT 1 FROM DD_RecordWeight rw WHERE rw.DocStatus IN('CO', 'CL') AND rw.DD_Freight_ID = DD_Freight.DD_Freight_ID)</Data>
+      </PO>
+    </Step>
+    <Step SeqNo="20" StepType="AD">
+      <PO AD_Table_ID="108" Action="U" Record_ID="52726" Table="AD_Val_Rule">
+        <Data AD_Column_ID="193" Column="Code" oldValue="C_Order.IsSOTrx = '@IsSOTrx@'">C_Order.IsSOTrx = '@IsSOTrx@'
+AND C_Order.DocStatus = 'CO'
+AND NOT EXISTS(SELECT 1 FROM DD_RecordWeight rw WHERE rw.DocStatus IN('CO', 'CL') AND rw.C_Order_ID = C_Order.C_Order_ID)</Data>
+      </PO>
+    </Step>
+  </Migration>
+</Migrations>

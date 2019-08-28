@@ -29,6 +29,7 @@ import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Msg;
 import org.eevolution.model.MDDFreight;
+import org.eevolution.model.MDDFreightLine;
 
 /** Generated Model for DD_RecordWeight
  *  @author Adempiere (generated) 
@@ -152,6 +153,8 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 			m_processMsg = "@PeriodClosed@";
 			return DocAction.STATUS_Invalid;
 		}
+		//	Get weight from minimum and maximum
+		getWeightFromDocuments();
 		//	Add up Amounts
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_AFTER_PREPARE);
 		if (m_processMsg != null)
@@ -161,6 +164,47 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 			setDocAction(DOCACTION_Complete);
 		return DocAction.STATUS_InProgress;
 	}	//	prepareIt
+	
+	/**
+	 * Get Weight from Document
+	 */
+	private void getWeightFromDocuments() {
+		BigDecimal minimumWeight = Env.ZERO;
+		BigDecimal maximumWeight = Env.ZERO;
+		if(getC_OrderLine_ID() != 0) {
+			MOrderLine orderLine = new MOrderLine(getCtx(), getC_OrderLine_ID(), get_TrxName());
+			if(orderLine.getM_Product_ID() != 0) {
+				MProduct product = MProduct.get(getCtx(), orderLine.getM_Product_ID());
+				//	Minimum
+				if(product.get_Value(COLUMNNAME_MinimumWeight) != null) {
+					minimumWeight = (BigDecimal) product.get_Value(COLUMNNAME_MinimumWeight);
+				}
+				//	Maximum
+				if(product.get_Value(COLUMNNAME_MaximumWeight) != null) {
+					minimumWeight = (BigDecimal) product.get_Value(COLUMNNAME_MaximumWeight);
+				}
+			}
+		} else if(getDD_Freight_ID() != 0) {
+			MDDFreight freightOrder = new MDDFreight(getCtx(), getDD_Freight_ID(), get_TrxName());
+			for(MDDFreightLine freightLine : freightOrder.getLines()) {
+				if(freightLine.getM_Product_ID() != 0) {
+					MProduct product = MProduct.get(getCtx(), freightLine.getM_Product_ID());
+					//	Minimum
+					if(product.get_Value(COLUMNNAME_MinimumWeight) != null) {
+						minimumWeight = minimumWeight.add((BigDecimal) product.get_Value(COLUMNNAME_MinimumWeight));
+					}
+					//	Maximum
+					if(product.get_Value(COLUMNNAME_MaximumWeight) != null) {
+						minimumWeight = minimumWeight.add((BigDecimal) product.get_Value(COLUMNNAME_MaximumWeight));
+					}
+				}
+			}
+		}
+		//	Set
+		setMinimumWeight(minimumWeight);
+		setMaximumWeight(maximumWeight);
+		saveEx();
+	}
 	
 	/**
 	 * 	Approve Document
