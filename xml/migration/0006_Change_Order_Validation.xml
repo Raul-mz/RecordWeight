@@ -14,5 +14,11 @@ AND C_Order.DocStatus = 'CO'
 AND NOT EXISTS(SELECT 1 FROM DD_RecordWeight rw WHERE rw.DocStatus IN('CO', 'CL') AND rw.C_Order_ID = C_Order.C_Order_ID)</Data>
       </PO>
     </Step>
+    <Step SeqNo="30" StepType="AD">
+      <PO AD_Table_ID="101" Action="U" Record_ID="94263" Table="AD_Column">
+        <Data AD_Column_ID="227" Column="AD_Reference_Value_ID" isNewNull="true" oldValue="271"/>
+        <Data AD_Column_ID="226" Column="AD_Reference_ID" oldValue="30">19</Data>
+      </PO>
+    </Step>
   </Migration>
 </Migrations>
