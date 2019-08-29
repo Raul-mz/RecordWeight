@@ -188,10 +188,12 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 				//	Minimum
 				if(product.get_Value(COLUMNNAME_MinimumWeight) != null) {
 					minimumWeight = (BigDecimal) product.get_Value(COLUMNNAME_MinimumWeight);
+					minimumWeight = minimumWeight.multiply(orderLine.getQtyOrdered());
 				}
 				//	Maximum
 				if(product.get_Value(COLUMNNAME_MaximumWeight) != null) {
-					minimumWeight = (BigDecimal) product.get_Value(COLUMNNAME_MaximumWeight);
+					maximumWeight = (BigDecimal) product.get_Value(COLUMNNAME_MaximumWeight);
+					maximumWeight = maximumWeight.multiply(orderLine.getQtyOrdered());
 				}
 			}
 		} else if(getDD_Freight_ID() != 0) {
@@ -205,7 +207,7 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 					}
 					//	Maximum
 					if(product.get_Value(COLUMNNAME_MaximumWeight) != null) {
-						minimumWeight = minimumWeight.add((BigDecimal) product.get_Value(COLUMNNAME_MaximumWeight));
+						maximumWeight = maximumWeight.add((BigDecimal) product.get_Value(COLUMNNAME_MaximumWeight));
 					}
 				}
 			}
@@ -256,14 +258,14 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 		if (m_processMsg != null)
 			return DocAction.STATUS_Invalid;
 		
+		if(!getWeightStatus().equals(WEIGHTSTATUS_Completed)) {
+			throw new AdempiereException("@IncompleteRecordWeight@");
+		}
 		//	Implicit Approval
 		if (!isApproved())
 			approveIt();
 		log.info(toString());
 		//
-		if(!getWeightStatus().equals(WEIGHTSTATUS_Completed)) {
-			throw new AdempiereException("@IncompleteRecordWeight@");
-		}
 		//	User Validation
 		String valid = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_AFTER_COMPLETE);
 		if (valid != null)
