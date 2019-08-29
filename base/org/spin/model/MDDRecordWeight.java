@@ -21,6 +21,8 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
+
+import org.adempiere.exceptions.AdempiereException;
 import org.compiere.model.*;
 import org.compiere.process.DocAction;
 import org.compiere.process.DocOptions;
@@ -153,6 +155,14 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 			m_processMsg = "@PeriodClosed@";
 			return DocAction.STATUS_Invalid;
 		}
+		// Validate weight for get
+		if(!isSOTrx() 
+				&& getWeightStatus().equals(WEIGHTSTATUS_WaitingForGrossWeight)) {
+			throw new AdempiereException("@FillMandatory@ @GrossWeight@");
+		} else if(isSOTrx() 
+				&& getWeightStatus().equals(WEIGHTSTATUS_WaitingForTareWeight)) {
+			throw new AdempiereException("@FillMandatory@ @TareWeight@");
+		}
 		//	Get weight from minimum and maximum
 		getWeightFromDocuments();
 		//	Add up Amounts
@@ -251,7 +261,9 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 			approveIt();
 		log.info(toString());
 		//
-		
+		if(!getWeightStatus().equals(WEIGHTSTATUS_Completed)) {
+			throw new AdempiereException("@IncompleteRecordWeight@");
+		}
 		//	User Validation
 		String valid = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_AFTER_COMPLETE);
 		if (valid != null)
