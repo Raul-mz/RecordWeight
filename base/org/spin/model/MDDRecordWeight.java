@@ -196,19 +196,36 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 					maximumWeight = maximumWeight.multiply(orderLine.getQtyOrdered());
 				}
 			}
+		} else if(getC_Order_ID() != 0) {
+			MOrder order = new MOrder(getCtx(), getC_Order_ID(), get_TrxName());
+			for(MOrderLine orderLine : order.getLines()) {
+				if(orderLine.getM_Product_ID() == 0) {
+					continue;
+				}
+				MProduct product = MProduct.get(getCtx(), orderLine.getM_Product_ID());
+				//	Minimum
+				if(product.get_Value(COLUMNNAME_MinimumWeight) != null) {
+					minimumWeight = minimumWeight.add((BigDecimal) product.get_Value(COLUMNNAME_MinimumWeight));
+				}
+				//	Maximum
+				if(product.get_Value(COLUMNNAME_MaximumWeight) != null) {
+					maximumWeight = maximumWeight.add((BigDecimal) product.get_Value(COLUMNNAME_MaximumWeight));
+				}
+			}
 		} else if(getDD_Freight_ID() != 0) {
 			MDDFreight freightOrder = new MDDFreight(getCtx(), getDD_Freight_ID(), get_TrxName());
 			for(MDDFreightLine freightLine : freightOrder.getLines()) {
-				if(freightLine.getM_Product_ID() != 0) {
-					MProduct product = MProduct.get(getCtx(), freightLine.getM_Product_ID());
-					//	Minimum
-					if(product.get_Value(COLUMNNAME_MinimumWeight) != null) {
-						minimumWeight = minimumWeight.add((BigDecimal) product.get_Value(COLUMNNAME_MinimumWeight));
-					}
-					//	Maximum
-					if(product.get_Value(COLUMNNAME_MaximumWeight) != null) {
-						maximumWeight = maximumWeight.add((BigDecimal) product.get_Value(COLUMNNAME_MaximumWeight));
-					}
+				if(freightLine.getM_Product_ID() == 0) {
+					continue;
+				}
+				MProduct product = MProduct.get(getCtx(), freightLine.getM_Product_ID());
+				//	Minimum
+				if(product.get_Value(COLUMNNAME_MinimumWeight) != null) {
+					minimumWeight = minimumWeight.add((BigDecimal) product.get_Value(COLUMNNAME_MinimumWeight));
+				}
+				//	Maximum
+				if(product.get_Value(COLUMNNAME_MaximumWeight) != null) {
+					maximumWeight = maximumWeight.add((BigDecimal) product.get_Value(COLUMNNAME_MaximumWeight));
 				}
 			}
 		}
@@ -283,6 +300,14 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 	
 	@Override
 	protected boolean beforeSave(boolean newRecord) {
+		if(getC_UOM_ID() == 0) {
+			//
+			int uomWeightId = MClientInfo.get(getCtx()).getC_UOM_Weight_ID();
+			if(uomWeightId == 0) {
+				throw new AdempiereException("@FillMandatory@ @C_UOM_ID@");
+			}
+			setC_UOM_ID(uomWeightId);
+		}
 		if(is_ValueChanged(COLUMNNAME_DD_Freight_ID)) {
 			setFreightValues();
 		}
@@ -524,6 +549,26 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 
 		return false;
 	}	//	reverseAccrualIt
+	
+	
+	/**
+	 * Get Converted Weight
+	 * @param productId
+	 * @return
+	 */
+	public BigDecimal getConvertedWeight(int productId) {
+		//	Rate Convert
+		MProduct product = MProduct.get(getCtx(), productId);
+		BigDecimal rate = MUOMConversion.getProductRateFrom(Env.getCtx(), 
+				productId, getC_UOM_ID());
+		
+		if(rate == null
+				|| rate.equals(Env.ZERO)) {
+			throw new AdempiereException("@NoUOMConversion@ @M_Product_ID@: " + product.getValue() + " - " + product.get_Translation(I_M_Product.COLUMNNAME_Name));
+		}
+		//	
+		return getNetWeight().multiply(rate);
+	}
 	
 	/** 
 	 * 	Re-activate
