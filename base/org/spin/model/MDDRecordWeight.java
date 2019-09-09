@@ -30,8 +30,10 @@ import org.compiere.process.DocumentEngine;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Msg;
+import org.eevolution.model.I_WM_InOutBoundLine;
 import org.eevolution.model.MDDFreight;
-import org.eevolution.model.MDDFreightLine;
+import org.eevolution.model.MWMInOutBound;
+import org.eevolution.model.MWMInOutBoundLine;
 
 /** Generated Model for DD_RecordWeight
  *  @author Adempiere (generated) 
@@ -214,18 +216,21 @@ public class MDDRecordWeight extends X_DD_RecordWeight implements DocAction, Doc
 			}
 		} else if(getDD_Freight_ID() != 0) {
 			MDDFreight freightOrder = new MDDFreight(getCtx(), getDD_Freight_ID(), get_TrxName());
-			for(MDDFreightLine freightLine : freightOrder.getLines()) {
-				if(freightLine.getM_Product_ID() == 0) {
-					continue;
-				}
-				MProduct product = MProduct.get(getCtx(), freightLine.getM_Product_ID());
-				//	Minimum
-				if(product.get_Value(COLUMNNAME_MinimumWeight) != null) {
-					minimumWeight = minimumWeight.add((BigDecimal) product.get_Value(COLUMNNAME_MinimumWeight));
-				}
-				//	Maximum
-				if(product.get_Value(COLUMNNAME_MaximumWeight) != null) {
-					maximumWeight = maximumWeight.add((BigDecimal) product.get_Value(COLUMNNAME_MaximumWeight));
+			if(freightOrder.getWM_InOutBound_ID() != 0) {
+				MWMInOutBound outbound = new MWMInOutBound(getCtx(), freightOrder.getWM_InOutBound_ID(), get_TrxName());
+				for(MWMInOutBoundLine outBoundLine : outbound.getLines(true, I_WM_InOutBoundLine.COLUMNNAME_Line)) {
+					if(outBoundLine.getM_Product_ID() == 0) {
+						continue;
+					}
+					MProduct product = MProduct.get(getCtx(), outBoundLine.getM_Product_ID());
+					//	Minimum
+					if(product.get_Value(COLUMNNAME_MinimumWeight) != null) {
+						minimumWeight = minimumWeight.add((BigDecimal) product.get_Value(COLUMNNAME_MinimumWeight));
+					}
+					//	Maximum
+					if(product.get_Value(COLUMNNAME_MaximumWeight) != null) {
+						maximumWeight = maximumWeight.add((BigDecimal) product.get_Value(COLUMNNAME_MaximumWeight));
+					}
 				}
 			}
 		}
