@@ -519,68 +519,6 @@
         <Data AD_Column_ID="3360" Column="IsUpdateable">true</Data>
       </PO>
     </Step>
-    <Step SeqNo="150" StepType="AD">
-      <PO AD_Table_ID="102" Action="I" Record_ID="54155" Table="AD_Reference">
-        <Data AD_Column_ID="556" Column="Updated">2019-07-05 17:27:04.933</Data>
-        <Data AD_Column_ID="553" Column="IsActive">true</Data>
-        <Data AD_Column_ID="554" Column="Created">2019-07-05 17:27:04.933</Data>
-        <Data AD_Column_ID="139" Column="ValidationType">T</Data>
-        <Data AD_Column_ID="132" Column="Help" isNewNull="true"/>
-        <Data AD_Column_ID="54355" Column="IsOrderByValue">false</Data>
-        <Data AD_Column_ID="1180" Column="VFormat" isNewNull="true"/>
-        <Data AD_Column_ID="130" Column="Name">DD_Freight reference</Data>
-        <Data AD_Column_ID="131" Column="Description">Freight reference</Data>
-        <Data AD_Column_ID="129" Column="AD_Reference_ID">54155</Data>
-        <Data AD_Column_ID="363" Column="AD_Client_ID">0</Data>
-        <Data AD_Column_ID="364" Column="AD_Org_ID">0</Data>
-        <Data AD_Column_ID="6486" Column="EntityType">ECA07</Data>
-        <Data AD_Column_ID="557" Column="UpdatedBy">100</Data>
-        <Data AD_Column_ID="555" Column="CreatedBy">100</Data>
-        <Data AD_Column_ID="84393" Column="UUID">eff11e0c-9f69-11e9-8358-0242ac110002</Data>
-      </PO>
-    </Step>
-    <Step SeqNo="160" StepType="AD">
-      <PO AD_Table_ID="126" Action="I" Record_ID="0" Table="AD_Reference_Trl">
-        <Data AD_Column_ID="280" Column="Name">DD_Freight reference</Data>
-        <Data AD_Column_ID="282" Column="Help" isNewNull="true"/>
-        <Data AD_Column_ID="666" Column="IsActive">true</Data>
-        <Data AD_Column_ID="667" Column="Created">2019-07-05 17:27:05.927</Data>
-        <Data AD_Column_ID="669" Column="Updated">2019-07-05 17:27:05.927</Data>
-        <Data AD_Column_ID="668" Column="CreatedBy">100</Data>
-        <Data AD_Column_ID="283" Column="IsTranslated">false</Data>
-        <Data AD_Column_ID="281" Column="Description">Freight reference</Data>
-        <Data AD_Column_ID="1203" Column="AD_Org_ID">0</Data>
-        <Data AD_Column_ID="1202" Column="AD_Client_ID">0</Data>
-        <Data AD_Column_ID="670" Column="UpdatedBy">100</Data>
-        <Data AD_Column_ID="279" Column="AD_Language">es_MX</Data>
-        <Data AD_Column_ID="278" Column="AD_Reference_ID">54155</Data>
-        <Data AD_Column_ID="84394" Column="UUID">f000c280-9f69-11e9-8358-0242ac110002</Data>
-      </PO>
-    </Step>
-    <Step SeqNo="170" StepType="AD">
-      <PO AD_Table_ID="103" Action="I" Record_ID="54155" Table="AD_Ref_Table">
-        <Data AD_Column_ID="559" Column="Created">2019-07-05 17:27:06.315</Data>
-        <Data AD_Column_ID="7711" Column="EntityType">ECA07</Data>
-        <Data AD_Column_ID="367" Column="AD_Client_ID">0</Data>
-        <Data AD_Column_ID="368" Column="AD_Org_ID">0</Data>
-        <Data AD_Column_ID="143" Column="AD_Table_ID">54258</Data>
-        <Data AD_Column_ID="57270" Column="AD_Window_ID" isNewNull="true"/>
-        <Data AD_Column_ID="144" Column="AD_Key">83721</Data>
-        <Data AD_Column_ID="142" Column="AD_Reference_ID">54155</Data>
-        <Data AD_Column_ID="562" Column="UpdatedBy">100</Data>
-        <Data AD_Column_ID="560" Column="CreatedBy">100</Data>
-        <Data AD_Column_ID="84392" Column="UUID">fb429934-9f69-11e9-8358-0242ac110002</Data>
-        <Data AD_Column_ID="561" Column="Updated">2019-07-05 17:27:06.315</Data>
-        <Data AD_Column_ID="558" Column="IsActive">true</Data>
-        <Data AD_Column_ID="147" Column="OrderByClause" isNewNull="true"/>
-        <Data AD_Column_ID="2377" Column="IsValueDisplayed">false</Data>
-        <Data AD_Column_ID="146" Column="WhereClause" isNewNull="true"/>
-        <Data AD_Column_ID="62120" Column="IsAlert">false</Data>
-        <Data AD_Column_ID="62121" Column="DisplaySQL" isNewNull="true"/>
-        <Data AD_Column_ID="62122" Column="IsDisplayIdentifier">false</Data>
-        <Data AD_Column_ID="145" Column="AD_Display">83733</Data>
-      </PO>
-    </Step>
     <Step SeqNo="180" StepType="AD">
       <PO AD_Table_ID="108" Action="I" Record_ID="52714" Table="AD_Val_Rule">
         <Data AD_Column_ID="583" Column="IsActive">true</Data>
